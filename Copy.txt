@@ -1,0 +1,184 @@
+
+         Paper ID: 1086
+Sentinel: A Human-in-the-loop AI Framework for Electoral De-Duplication
+ 
+Suhas U 
+Department of Computer Science and Engineering
+The National Institute of Engineering
+Mysuru, India
+suhasu710@gmail.com
+Zaiba Farheen 
+Department of Computer Science and Engineering
+The National Institute of Engineering
+Mysuru, India
+zaibafarheen@nie.ac.in 
+Sujay Mudakappa Matur 
+Department of Computer Science and Engineering
+The National Institute of Engineering
+Mysuru, India
+mahanteshsujaymatur@gmail.com
+Shabana Sultana 
+Department of Computer Science and Engineering
+The National Institute of Engineering
+Mysuru, India
+shabana@nie.ac.in
+ 
+ 
+ 
+Abstract— Ensuring the precision of elections is crucial for maintaining respect and trust in democracy and other governmental procedures. Duplicate voter representations, arising from numerous sources like administrative problems and identity fraud, present a significant challenge in large scale democracies. But facial recognition systems present in the contemporary world may not solve all the issues of de-duplication, new issues can develop from it like removal of real and genuine voters. This research paper introduces Sentinel, an AI-enabled technology and innovation that uses the combination of deep learning as well a human in the loop mechanism. The system uses an SSD MobileNet V1 for face detection, and a fully implemented ResNet-34 architecture to generate 128-dimensional facial embeddings, which are then compared using the Euclidean distance to identify any duplicates in the database. Instead of automatically rejecting suspicious records they will be resolved by human intervention.
+Keywords— Electoral integrity, Human-in-the-loop (HITL), Deep Convolutional Neural Networks, TensorFlow.js, Biometric De-duplication, Euclidean distance, Augmented Intelligence, SSD MobileNet.
+I.	INTRODUCTION
+The idea of one person one vote is the fundamental principle for our democratic systems, making for fair and transparent elections. The authorities have access to a database consisting of millions of voter data which can be hacked or manipulated. These duplicate entries harm the country in many different ways [1] [12].
+Conventional methods to stop these anomalies rely mainly on matching of textual data like names, date of birth, residential address. These attributes are prone to minor inconsistencies like typos and other small errors. So, in large populations, they cannot be trusted.
+Facial recognition has emerged as the solution to this issue by connecting voter id to facial characteristics which are very difficult to manipulate. Development in CNNs and deep learning algorithms have made this process accurate and precise than ever before [3], [10], [11].  But, to deploy them in large democracies is still a complicated task. 
+To make this system useful in real life, artificial intelligence in public systems is deployed. AI enabled social innovation plays a vital role in making sure sustainable electoral governance [12] [9] by merging technology with human accountability. 
+Sentinel, a case based biometric de-duplication architecture balances automation and human intervention. Instead of solely trusting AI, Sentinel introduces a structured human in the loop (HITL) [6] verification process, so that the final decision maker will be a trusted human authority.
+The main contributions are summarized below:
+1.	The design of an AI-enabled, case-based biometric de-duplication framework for sustainable electoral governance.
+2.	The integration of a mandatory human-in-the-loop workflow to mitigate false positives and enhance accountability.
+3.	An experimental evaluation demonstrating reliable duplicate detection under realistic voter data variability
+II.	RELATED WORK
+Research work on de-duplication, face verification techniques, biometric authentication and human in the loop (HITL) systems. This part looks at earlier work on the proposed architecture and highlights the problems in contemporary systems.
+A.	De-Duplication in Elections
+Previous systems used in finding duplicate identification employed matching of text data or fingerprint comparison. Hashing was used for file security but was useless in biometric de-duplication [1], as even the smallest changes gave really significant challenges because of the avalanche effect.
+In recent times, more studies show that facial recognition has improved accuracy. However, implementation in large voter databases is still a significant challenge.
+B.	Deep Learning – Based Facial Identification
+Advancements in the field of deep learning has given the authorities much more reliability in this model. The CNNs with the help of a kernel compresses the size of the image into a feature map. Here, in the feature map, comparisons like Euclidean distance formula are applied along with the help of models like FaceNet, ArcFace and DeepFace [5]. These results are better and more reliable on untrained datasets compared to the previous versions.
+The benchmark datasets were reported with very high accuracy. But these improvements are only for the facial recognition part of the framework. The involvement of governments and large-scale democracies still poses security and safety issues.
+C.	Human in the Loop Systems for High Stakes Decision Making
+Human-in-the-loop (HITL) have gained popularity in domains like medical diagnosis, security systems and other safety and security related fields. These frameworks use AI and solve basic and simple problems and human stakeholders are positioned to give the final decision. Prior research shows that error percentage drops significantly after the introduction of the human in the system.
+In the context of the election process, HITL is still of limited use. Sentinel addresses this issue by integrating a AI based facial recognition model in which potential duplicates will be processed and verified by a human verifier before the final judgement [4], [9].
+III.	PROPOSED FRAMEWORK
+The proposed architecture, Sentinel is a case oriented de-duplication framework created to detect duplicate voter entries. The architecture makes use of deep learning-based algorithm for facial detection along with a mandatory human in the loop verification process. This ensures efficiency as well as reduction in error percentage as we are not reliant fully on automation.
+ 
+Figure 1: Sentinel Framework Architecture
+The Sentinel framework architecture is shown in Figure 1 which depicts end-to-end data flow and the interaction between the user roles – Admin and Verifier. The admin uploads voter’s raw data to the processing engine, then the Face-API engine starts to compute vectors, which are compared against the simulated database and any flagged conflicts create a ‘Case’ which will be sent to the Verifier’s UI for the final resolution.
+A.	System Overview
+Sentinel deploys a dual-role framework which has two unique actors: Admin and Verifier. The Admin is necessary for uploading the data of the voter and the verifier is needed to resolve any flagged duplicate entries. The separation of these roles creates transparency and gives accountability to all the stakeholders involved.
+The system uses a client-side web application. Here, the processing of biometric data takes place and is executed efficiently. This structure reduces the complexity and simplifies the data entry process. A simple low-level flowchart is given.
+ 
+Figure 2: Low-level system architecture
+A simple architecture of Sentinel is shown in Figure 2. Here it depicts the operational sequence: First the Biometric capture by the enrolment officer which is then followed by feature extraction, Euclidean matching, and finally a human verification of the flagged case(s) by the Verification Authority. 
+B.	Biometric Processing Pipeline
+	The data flow pipeline consists of mainly four stages which are sequential: Face detection, feature embedding generation, similarity comparison, and case generation.
+•	Face Detection: Each face which is uploaded is processed with the help of a convolutional neural network which is based on the SSD MobileNet V1, implemented through face-api.js library [10], [11]. This detects facial features and extracts a normalized region for simpler processing.
+•	Feature Embedding Generation: The normalized facial region is given to a pre-trained ResNet-34 Architecture. It then gives a 128-dimensional facial embedding. These embeddings show the required facial features which remain stable enough under different lighting and other technical variations.
+•	Similarity Comparison: To detect the duplicate entries, the system uses the Euclidean distance between the embeddings of the new entry with the embeddings already present in the database. Lower distance values mean that the similarity in facial features is high.
+The Euclidean formula used in Sentinel is:         
+d (A, B) =  		(1)
+Here, A and B are the embeddings stored in the voter database of two voters. 128 is used as we are using 128-dimensional vectors. Lower the distance d means that the probability that A and B are of the same person is very likely [13].
+•	Case Generation: If the distance between two facial embeddings falls below a predefined threshold, the system does not automatically reject the entry. It groups the matching records into a clear and structured verification case, which is forwarded to the human Verifier for manual review. The Equation (1) used for the similarity calculations. 
+•	The complete biometric pipeline operates sequentially as follows: face detection is performed using SSD MobileNet V1 implemented through face-api.js; detected faces are passed to a fully implemented, pre-trained ResNet-34 model trained on the VGGFace2 dataset for 128-dimensional embedding generation; embeddings are compared using Euclidean distance; records below the threshold are grouped into verification cases and forwarded to the human Verifier.
+C.	Case-based Human-in-the-loop Workflow
+Case-based HITL workflow is a defining characteristic of our system Sentinel. Until the cases are resolved, all voters who are temporarily flagged will be withheld from the electoral voter list. The Verifier then reviews each case with the help of the data displayed, which are the visuals and metadata of the voters in a side-by-side format.
+In the Verifier’s dashboard, Verifier may confirm one record as the original identity and marking others as duplicate, or when the system gives false positive, the Verifier can retain multiple records as distinct individuals. By this method we can ensure that AI automated system function as a decision-support signal rather than final judgements.
+ 
+Figure 3: Algorithmic Data-Flow Process
+The flowchart shown in Figure 3, Here it depicts the logic tree of the system. Once the feature extraction is done by the ResNet-34 model and Euclidean comparison, a decision node is assessed if the distance is less than 0.45. Flagged case(s) are sent to the Verifier while the unique identities are sent directly to the DB.
+D.	Auditability and Accountability
+After every case is resolved by the Verifier, the resolution is recorded in an immutable audit log, where we store the case identifier, resolution outcome, identity of verifier along with a timestamp. By having this audit trail, it gives proper transparency and accountability which helps us to comply with governance and meet regulatory requirements in the electoral system [1] [4] [12].
+E.	Computational Environment
+Our prototype was deployed and assessed on a standard client workstation equipped with a Intel Core i5 processor with 8GB RAM. On the client-side  using Google Chrome browser environment and utilizing WebGL for hardware acceleration to ensure privacy, we executed the inference. The implemented ResNet-34 model was pre-trained on the comprehensive VGGFace2 dataset, in which 3.3 million face images are present [14]. With the help of this large-scale pre-trained model provides a robust generalization even with noise in the images which removes local training overhead.
+IV.	ALGORITHM AND THRESHOLD JUSTIFICATION
+In this section, we will see the algorithmic workflow that is used for biometric de-duplication in our Sentinel, which provides justification for the similarity threshold applied during duplicate detection.
+A.	Biometric De-duplication Algorithm
+Our system follows a structured pipeline in which facial recognition is used to detect potential duplicate individuals, which are sent to the Verifier for the final decision- making. The algorithm operates in the following steps:
+1.	Face Detection: By using SSD MobileNet V1 we process each voter’s image to detect and localize the facial region.
+2.	Feature Embedding Generation: Now the detected face is sent to a pre-trained convolutional neural network that generates a 128-dimensional facial embedding and this represents the individual/voter’s identity.
+3.	Similarity Computation: Here we compare a newly registered voter’s embedding with embeddings stored in the voter database using the Euclidean distance.
+4.	Case Generation: Now the voter records are grouped into a verification case based on the Euclidean distance that falls below a predefined similarity threshold and these cases are sent to the Verifier’s dashboard for manual verification.
+5.	Human-in-the-loop Resolution: Finally, the Verifier examines the flagged cases/records by using the help of visual and metadata and resolve the case by confirming them as genuine voters or identifying false positives.
+With this workflow, we can ensure that facial similarity scores are used as indicators for a potential duplicate rather than decision-making criteria [2].
+ 
+Pseudo-code: This section of the code showcases the workflow which takes place in the Sentinel framework.
+
+Input: New Image of the voter (New_Img), Database DB 
+Output: Status of registration
+1. New_Embedding = Resnet34(Face_Detect (New_Img))
+2. Min_Distance = Infinity
+3. Potential_Match = Null
+4. FOR each Entry_i in Database DB:
+5.      Embedding_i=Record_i.Embedding
+6.      Distance = Euclidean (New_Embedding, Embedding_i)
+7.      IF Min_Distance > Distance
+8.                Min_Distance = Distance
+9.                Potential_Match = Record_i
+10.IF Min_Distance < Threshold (0.45):
+11.     New_case(New_Img, Potential_Match)
+12.     Status = “Waiting for Verification (HITL)”
+13.ELSE:
+14.     AddToDatabase(New_Img)
+15.     Status = “Successfully registered”
+16. RETURN Status
+B.	Threshold Selection and Justification
+For our biometric de-duplication systems, we need to select appropriate similarity threshold. This directly influences the trade-off between false acceptance and false rejection rates in our system. We use Euclidean distance to measure the similarity between 128-dimensional facial embeddings, in which the lower the distance value, higher the similarity [5] [13].
+In order to find a suitable threshold, we conducted a preliminary experiment on a controlled dataset containing both unique identities and known duplicates under varying image conditions like change in pose, illumination, and image quality [7]. After analysing the distance distribution for a genuine match and non-matches we identified a separation region that minimizes overlap between the two classes.
+From this analysis, we determined a threshold in the range of 0.4-0.5 to flag potential duplicates. Anything below this threshold consistently provided with high similarity cases, while the larger distances indicate a distinct identity. With the help of our system, we treat all flagged cases below the threshold as a candidate for further human review instead of enforcing a hard acceptance or rejection decision.
+We decided that the threshold range of 0.4 – 0.5 based on our analysis. We considered False Acceptance Rate (FAR) and False Rejection Rate (FRR). In critical situations, lower the False Acceptance Rate, is considered a win for all stakeholders involved. However, a very high threshold would mean that we flag legitimate voters as potential duplicates which we do not want in our scenario.
+From the preliminary testing of our dataset, we came to the conclusion that 0.45 is the optimal balanced value.
+V.	EXPERIMENTAL EVALUATION
+In this section we will see the experimental setup that we used to evaluate the effectiveness of our system framework and provide quantitative results which show its performance in biometric voter de-duplication.
+A.	Dataset Description
+Now to assess the proposed system we use a scenario that closely match the real-world voter registration conditions, we designed a controlled experimental dataset. This dataset is designed to simulate a real-world scenario where images provided to the electoral databases will have variations like different pose, illumination and image quality.
+The dataset consists of 1,000 voters:
+•	800 unique identities: Distinct individual voters with no repetitions or duplicates.
+•	200 duplicate records: Produced by associating multiple facial images of the same person taken under different conditions.
+The characteristics of this dataset were taken from the publicly available face datasets such as VGGFace2 [14] in a manageable size required to evaluate our system, and the ground truth labels were manually assigned to distinguish the genuine duplicates from the unique identities.
+B.	Evaluation Protocol
+In our system pipeline, we processed each voter image to generate 128-dimensional facial embeddings. By using Euclidean distance, we compare a newly registered voter’s embedding with embeddings stored in the voter database.
+To flag a potential duplicate, we have set a similarity threshold in the range of 0.4-0.5. All case that are flagged is sent to human verification instead of automatically rejecting or approving the candidate [4]. The system is assessed by its ability to correctly identify the duplicate identities along with minimizing the false positives. 
+To evaluate our system, we used following metrics:
+•	Precision
+•	Recall
+•	F1-score
+•	False Acceptance Rate (FAR)
+•	False Rejection Rate (FRR)
+C.	Confusion Matrix Analysis
+	Predicted Duplicate	Predicted Unique
+Actual Duplicate	True Positive (TP) = 197	False Negative (FN) = 3
+Actual Unique	False Positive (FP) = 2	True Negative (TN) = 798
+Table 1: Confusion Matrix
+Table 1 Shows the confusion matrix obtained from our experimental evaluation.
+The confusion matrix is constructed based on system predictions made before human verification which allows us to analyse the automated detection separately
+D.	Quantitative Results
+From the above Table 1, the following metrics are computed:
+Metric	Value
+Precision	99.2%
+Recall	98.5%
+F1-Score	98.8%
+False Acceptance Rate (FAR)	0.25%
+False Rejection Rate (FRR)	1.5%
+ Table 2: Performance Metrics
+The results of Table 2 show the proposed system framework achieves high duplicate detection accuracy while minimizing false acceptance and rejection rates. Most of the false negatives occurred from the obstructions like face masks or partial face coverage which affected the embedding reliability. However, the experimental evaluation was conducted on a controlled dataset and may not fully represent the complexity of large-scale national voter databases. Further large-scale validation is required to assess scalability and operational robustness.
+E.	Impact of Human-in-the-loop
+Sentinel’s core strength lies in its human-in-the-loop architecture. Even though the automated system successfully filters out the majority of non-duplicate records but few uncertain cases particularly those involving high facial similarity are sent to human verifier. This step has prevented any exclusion of a legitimate voter and ensuring that final decisions are made based on both biometric evidence and contextual judgment [8].
+The HITL approach has changed the facial recognition system from making final decision to support the human verifier to make a fair and reliable judgments in removing duplicate entries from the electoral rolls.
+VI.	INTERPRETATION OF RESULTS
+The experimental Results show that our system Sentinel performs well in detecting a duplicate voter registration with very few false acceptance or false rejection rates. We use deep learning based facial embeddings which allows our system to perform well and provide reliable results even when the images differ in pose, illumination or quality in large voter database. These results help us confirm that biometric embeddings provide a reliable replacement to our traditional text-based or hash-based de-duplication methods.
+A key insight from the evaluation we observed is that performance metrics alone are not sufficient to ensure fairness in electoral application. Despite achieving high precision and recall, certain edge cases like strong facial resemblance between individuals or poor image quality remain challenging for purely algorithmic systems. 
+By integrating a mandatory human-in-the-loop verification approach helps to overcome the limitations of fully automated systems. By treating facial similarity score as indicators rather than final judgments, our system ensures that uncertain cases are verified in a structured and accountable manner. This lowers the chances of wrongly excluding eligible voters and increases trust in the de-duplication process [4] [6].
+From the governance point of view, Sentinel is a responsible AI-enabled social innovation that balances advanced technology with institutional oversight and accountability. Its dual-role system and audit logs make our system transparent and traceable, which are essential for sustainable electoral governance. By integrating computer vision, human judgment and public governance principles, our system shows how technologies can be ethically and socially accepted in the public systems [12].
+In this discussion, it shows that biometric de-duplication used in the elections should not be judged only on the basis of how accurate they are, but also on how fair and accountable the process is, for long-term institutional trust.
+VII.	LIMITATIONS
+The Sentinel System effectively reduces false positive case(s) with its human-in-the-loop design; however, our system still has some inherent limitations. The performance of its automated filtering module relies heavily on the input image quality. Noise in the image such as dense facial hair, veils or medical masks will cause failure in detecting a face and prevent subsequent feature embedding. Along with this, we also come across hardware limitations in all local administrative offices where performance depends on the computational capacity which are needed for client-side WebGL-based inference. Furthermore, Human verification inevitably increases cost and processing time which results in a trade-off between strict procedural fairness and fully automated system. 
+VIII.	CONCLUSION AND FUTURE ENHANCEMENT
+This paper presented Sentinel, a case-based biometric de-duplication framework to effectively address the critical challenges faced in the electoral management. Integrating the deep learning based facial recognition with a mandatory human-in-the-loop (HITL) verification process, our system addresses the limitations in both traditional text-based de-duplication methods and fully automated biometric systems. Our proposed framework shows that high duplicate accuracy can be achieved while still maintaining fairness in the process and provides accountability.
+The experimental assessment conducted on a controlled dataset shows that Sentinel can accurately identify the duplicate voter records under realistic conditions and maintain low false acceptance and false rejection rates. The case-based workflow will ensure any and all uncertain cases to be verified thus reducing false positive and strengthening trust in the electoral process. Along with these, the dual-role architecture and audit logging improves transparency and sustainable electoral governance [9] [12].
+While the current implementation serves as a proof-of-concept, there are many ways that we can improve it in the future. First, by adding liveness detection, it helps in preventing spoofing with printed or displayed photos [15]. Second, migrating biometric computation to a scalable server-side architecture which would improve efficiency when handling large national voter databases. Finally, using advanced facial recognition models and larger public datasets will help improve robustness of the system. These enhancements would strengthen Sentinel’s role as an AI-based social innovation for responsible and sustainable electoral governance.
+REFERENCES
+[1]	C. P. Divate, S. M. Patil, Renuka G. Badave “VoteChain: A Blockchain-Based Secure and Transparent Voting System,” International Research Journal of Engineering and Technology (IRJET), vol. 12, issue 11, pp. 729–731, Nov 2025
+[2]	Syafhendry S, Ganaie NA and Yama A (2025) Smart elections or rigged algorithms: the rise of artificial intelligence in electoral governance in Southeast Asia. Front. Polit. Sci. 7:1672310. doi: 10.3389/fpos.2025.1672310
+[3]	Halidou, A.; Olle, D.G.O.; Fadja, A.N.; Kallon, D.V.V.; Thibault, T.N.G. Voter Authentication Using Enhanced ResNet50 for Facial Recognition. Signals 2025, 6, 25. https://doi.org/10.3390/signals6020025
+[4]	Huang Y, Wang X, Zhang Y, Chen L and Zhang H (2025) Application of human-in-the-loop hybrid augmented intelligence approach in security inspection system. Front. Artif. Intell. 8:1518850. doi: 10.3389/frai.2025.1518850
+[5]	Minghan Li, “Research and Analysis of Facial Recognition Based on FaceNet, DeepFace, and OpenFace,” in ITM Web of Conferences 70:03009, January 2025, DOI:10.1051/itmconf/20257003009
+[6]	K. -L. A. Yau, Y. Saleem, Y. -W. Chong, X. Fan, J. M. Eyu and D. Chieng, "The Augmented Intelligence Perspective on Human-in-the-Loop Reinforcement Learning: Review, Concept Designs, and Future Directions," in IEEE Transactions on Human-Machine Systems, vol. 54, no. 6, pp. 762-777, Dec. 2024, doi: 10.1109/THMS.2024.3467370
+[7]	D. Jeong, E. Choi, H. Ahn, E. Martinez-Martin, E. Park and A. P. del Pobil, "Multi-modal Authentication Model for Occluded Faces in a Challenging Environment," in IEEE Transactions on Emerging Topics in Computational Intelligence, vol. 8, no. 5, pp. 3463-3473, Oct. 2024, doi: 10.1109/TETCI.2024.3390058
+[8]	AnandKumar Chennupati. The threat of artificial intelligence to elections worldwide: A review of the 2024 landscape. World Journal of Advanced Engineering Technology and Sciences, 2024, 12(01), 029–034. Article DOI: https://doi.org/10.30574/wjaets.2024.12.1.0177 
+[9]	Maciej Kuziemski, Gianluca Misuraca,” AI governance in the public sector: Three tales from the frontiers of automated decision-making in democratic settings”, Telecommunications Policy, Volume 44, Issue 6, 2020, 101976, ISSN 0308-5961, https://doi.org/10.1016/j.telpol.2020.101976 
+[10]	Bönström, V., “face-api.js: JavaScript API for Face Detection and Recognition,” GitHub Repository, 2018. [Online]. Available: https://github.com/justadudewhohacks/face-api.js
+[11]	Liu, W. et al. (2016). SSD: Single Shot MultiBox Detector. In: Leibe, B., Matas, J., Sebe, N., Welling, M. (eds) Computer Vision – ECCV 2016. ECCV 2016. Lecture Notes in Computer Science(), vol 9905. Springer, Cham. https://doi.org/10.1007/978-3-319-46448-0_2
+[12]	Janowski, T., “Digital Government Evolution: From Transformation to Contextualization,” Government Information Quarterly, vol. 32, no. 3, pp. 221–236, 2015, https://doi.org/10.1016/j.giq.2015.07.001
+[13]	F. Schroff, D. Kalenichenko and J. Philbin, "FaceNet: A unified embedding for face recognition and clustering," 2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), Boston, MA, USA, 2015, pp. 815-823, doi: 10.1109/CVPR.2015.7298682
+[14]	Q. Cao, L. Shen, W. Xie, O. M. Parkhi, and A. Zisserman, “VGGFace2: A dataset for recognising faces across pose and age,” in Proc. 13th IEEE Int. Conf. Autom. Face Gesture Recognit., 2018
+[15]	A. K. Jain, K. Nandakumar, and A. Ross, "50 Years of Biometric Research: Accomplishments, Challenges, and Opportunities," Pattern Recognition Letters, vol. 79, pp. 80-105, 2016 
+
