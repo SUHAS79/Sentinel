@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel - Biometric Comparison Workbench</title>
+    
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="style.css"> 
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Deferred JS -->
+    <script src="script.js" defer></script> 
+
+    <style>
+        /* Specific styles needed for this version */
+        .voter-card { 
+            transition: all 0.2s ease-in-out; 
+            border: 4px solid transparent;
+            position: relative;
+            cursor: pointer; 
+        }
+        .voter-card:hover { 
+            transform: scale(1.05); 
+            border-color: #374151; /* Use border color from CSS */
+        }
+        .voter-card.selected {
+            border-color: var(--color-primary); /* Use CSS variable */
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(var(--color-primary-rgb), 0.2);
+        }
+        .voter-card.selected::after {
+            content: '✓';
+            position: absolute; top: 8px; right: 8px; width: 32px; height: 32px;
+            background-color: var(--color-primary); color: var(--color-white); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 1.2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+        }
+        .output-box { font-family: 'Courier New', Courier, monospace; word-break: break-all; }
+        #comparison-results-container { transition: all 0.3s ease-in-out; }
+        
+        /* Loading spinner animation */
+         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } } /* Corrected animation */
+        .spinner {
+            border: 3px solid var(--color-border); /* Use CSS var */
+            border-top: 3px solid var(--color-primary); /* Use CSS var */
+            border-radius: 50%;
+            width: 1.25em; /* Size relative to text */
+            height: 1.25em;
+            animation: spin 1s linear infinite;
+            display: inline-block; /* Keep it inline */
+            margin-left: var(--space-8); /* Space from text */
+        }
+    </style>
+</head>
+<!-- Body classes applied -->
+<body class="bg-gray-900 text-white bg-pattern"> 
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        
+        <header class="text-center mb-12">
+            <!-- Header classes applied -->
+            <h1 class="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">🛡️ Sentinel</h1>
+            <p class="text-lg text-gray-400 mt-2">Privacy-Preserving Biometric Comparison</p>
+        </header>
+
+        <!-- Main Content: Unified Workbench -->
+        <div class="card space-y-8"> 
+            
+            <!-- Step 1: Voter Selection -->
+            <div>
+                <!-- Heading classes applied -->
+                <h2 class="text-3xl font-bold mb-2">1. Select Two Voter Images</h2>
+                <p class="text-gray-400 mb-8">Select any two images from the pool. The system will perform a privacy-preserving comparison to check if they are the same person.</p>
+                <!-- Gallery classes applied -->
+                <div id="voter-gallery" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                    <!-- Loading message -->
+                     <p class="col-span-full text-center text-gray-500 py-8">Loading images...</p>
+                </div>
+                 <!-- Setup Instruction Box -->
+                 <div id="setup-instruction" class="hidden alert alert-warning mt-6">
+                     <p><strong>Setup Required:</strong> The image gallery is empty. Please add sample images (e.g., `person_a_1.jpg`) to the <code>backend/voter_image_pool</code> folder and refresh.</p>
+                 </div>
+            </div>
+
+            <!-- Step 2: Compare & See Results -->
+            <div class="border-t border-gray-700 pt-8"> <!-- Standard HTML comment -->
+                <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                     <!-- Heading classes applied -->
+                     <h2 class="text-3xl font-bold text-center md:text-left">2. Compare & Get Result</h2>
+                     <div class="flex items-center gap-4">
+                        <span id="selection-counter" class="text-gray-400 font-semibold">0/2 Selected</span>
+                        <!-- Button with correct classes -->
+                        <button id="compare-btn" class="btn btn-primary w-64" disabled> <!-- Ensure classes are correct -->
+                            <span>Compare Images</span>
+                        </button>
+                     </div>
+                </div>
+                 <!-- Container classes applied -->
+                <div id="comparison-results-container" class="mt-8 min-h-[100px]"> <!-- Standard HTML comment -->
+                    <p class="text-center text-gray-500 py-8">Select two images and click "Compare Images" to see results.</p>
+                    <!-- Results will be injected here by script.js -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
